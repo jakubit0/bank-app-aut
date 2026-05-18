@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Demo App</title>
+</head>
+<body>
+
+<h1>Bank Demo App</h1>
+
+<input id="username" placeholder="Login">
+<input id="password" placeholder="Password" type="password">
+<button id="loginButton">Login</button>
+
+<p id="message"></p>
+
+<div id="accountSection" style="display:none;">
+
+    <h2>Bank Account</h2>
+
+    <p>
+        Balance:
+        <span id="balance">100</span> PLN
+    </p>
+
+    <input id="withdrawAmount" placeholder="Amount">
+
+    <button id="withdrawButton">Withdraw</button>
+
+    <p id="withdrawMessage"></p>
+
+    <h3>Transaction history</h3>
+
+    <ul id="transactionHistory"></ul>
+
+</div>
+
+<script>
+
+    let balance = 100;
+
+    document.getElementById("loginButton").onclick = function () {
+
+        const username = document.getElementById("username").value;
+
+        const password = document.getElementById("password").value;
+
+        if (username === "test" && password === "test123") {
+
+            document.getElementById("message").innerText = "Login successful";
+
+            document.getElementById("accountSection").style.display = "block";
+
+        } else {
+
+            document.getElementById("message").innerText = "Invalid login";
+        }
+    };
+
+    document.getElementById("withdrawButton").onclick = function () {
+
+        const amount = Number(document.getElementById("withdrawAmount").value);
+
+        if (amount > balance) {
+
+            document.getElementById("withdrawMessage").innerText = "Insufficient funds";
+
+        } else {
+
+            balance = balance - amount;
+
+            document.getElementById("balance").innerText = balance;
+
+            document.getElementById("withdrawMessage").innerText = "Withdrawal successful";
+
+            const transaction = document.createElement("li");
+
+            transaction.innerText = "Withdrawal: " + amount + " PLN";
+
+            document.getElementById("transactionHistory").appendChild(transaction);
+        }
+    };
+
+</script>
+
+</body>
+</html>
